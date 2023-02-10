@@ -1,5 +1,6 @@
 //Import Button from MUI library
 import Button from '@mui/material/Button';
+import React, { useEffect } from 'react';
 
 //Create variables storing the result of the game (win or lose) and assign it to an empty string.
 let finalMessage = "";
@@ -32,15 +33,17 @@ const PopUp = ({word, correctGuesses, wrongGuesses, gameOn, setGameOn, playAgain
     the finalMessage to "Congratulations! You won!", and setGameOn to false. If the game is lost, set 
     the finalMessage to "Unfortunately you lost", the hiddenWordRevealed to the word, and setGameOn to false.
     */
-    if(winORlost(word, correctGuesses, wrongGuesses) === "won") {
-        hiddenWordRevealed = "";
-        finalMessage = "Congratulations! You won! 🏆";
-        setGameOn(false);
-    } else if(winORlost(word, correctGuesses, wrongGuesses) === "lost"){
-        finalMessage = "Unfortunately you lost 😕";
-        hiddenWordRevealed = `The word was: ${word}`
-        setGameOn(false)
-    }
+    useEffect(() => {
+        if(winORlost(word, correctGuesses, wrongGuesses) === "won") {
+            hiddenWordRevealed = "";
+            finalMessage = "Congratulations! You won! 🏆";
+            setGameOn(false);
+        } else if(winORlost(word, correctGuesses, wrongGuesses) === "lost"){
+            finalMessage = "Unfortunately you lost 😕";
+            hiddenWordRevealed = `The word was: ${word}`
+            setGameOn(false)
+        }   
+    },[correctGuesses, wrongGuesses]);
 
     /* Return statement for the PopUp function. Return a div that contains a div with the final message 
     and the hidden word if the game is not on. Display a button that allows the user to play again. */
