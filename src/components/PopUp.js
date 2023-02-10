@@ -43,7 +43,7 @@ const PopUp = ({word, correctGuesses, wrongGuesses, gameOn, setGameOn, playAgain
             hiddenWordRevealed = `The word was: ${word}`
             setGameOn(false)
         }   
-    },[correctGuesses, wrongGuesses]);
+    },[correctGuesses, wrongGuesses, setGameOn, word]);
 
     /* Return statement for the PopUp function. Return a div that contains a div with the final message 
     and the hidden word if the game is not on. Display a button that allows the user to play again. */

@@ -21,8 +21,8 @@ function App() {
   const [dictionaryLoaded, setDictionaryLoaded] = useState(false);
 
   /* Create an async function to fetch the dictionary file, split it into an array, trim the whitespace 
-from each element, and filter out any elements that are only one character long. 
-Return an array of secret words from the dictionary. */
+  from each element, and filter out any elements that are only one character long. 
+  Return an array of secret words from the dictionary. */
   async function getDictionary() {
     try {
       const response = await fetch(dictionary);
@@ -37,27 +37,29 @@ Return an array of secret words from the dictionary. */
     }
   }
 
+  /* Check if the dictionary has been loaded, if not load it. */
   if (!dictionaryLoaded) dictionaryArr = getDictionary();
 
+  /* Checkif the dictionary has been loaded and if a new game has been started. If both are
+  true, pick a random word from the dictionary and set newGame to false. */
   if (dictionaryLoaded && newGame) {
     if (dictionaryArr.length > 0) {
       const randomIndex = Math.floor(Math.random() * dictionaryArr.length);
       word = dictionaryArr[randomIndex].toUpperCase();
-      console.log(`2 word: ${word}`);
       newGame = false
     } else {
       console.error("Error 2: No words found in the file");
     }
   }
 
+  /* Create a function to reset the game to its original state. */
   function playAgain() {
     setGameOn(true);
     setCorrectGuesses([]);
     setWrongGuesses([]);
     newGame = true
-    console.log(word);
   }
-  
+  /* Check if the dictionary is loaded. If so, render all the components with corresponding props. */
   return (
     <div> {dictionaryLoaded && 
       <div className="mainContainer">
@@ -89,5 +91,5 @@ Return an array of secret words from the dictionary. */
     </div>
   );
 }
-
+// Export the App
 export default App;
